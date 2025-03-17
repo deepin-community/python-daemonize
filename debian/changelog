@@ -1,5 +1,71 @@
-template-repository (1.0-1) unstable; urgency=medium
+python-daemonize (2.5.0-3) unstable; urgency=medium
 
-  * Initial release
+  * Switch to pybuild (Closes: #1090481).
 
- -- Tsic404 <liuheng@deepin.org>  Sat, 28 Jan 2023 13:46:49 +0800
+ -- Thomas Goirand <zigo@debian.org>  Thu, 19 Dec 2024 11:23:33 +0100
+
+python-daemonize (2.5.0-2) unstable; urgency=medium
+
+  * Cleans better (Closes: #1047089).
+
+ -- Thomas Goirand <zigo@debian.org>  Mon, 21 Aug 2023 09:42:39 +0200
+
+python-daemonize (2.5.0-1) unstable; urgency=medium
+
+  * New upstream release (Closes: #978620).
+  * Add use-python3-for-testing.patch.
+  * Run tests/test.py at build time.
+  * Add remove-broken-test.patch.
+
+ -- Thomas Goirand <zigo@debian.org>  Thu, 30 Dec 2021 10:35:17 +0100
+
+python-daemonize (2.4.7-4) unstable; urgency=medium
+
+  * Rebuilt source only.
+
+ -- Thomas Goirand <zigo@debian.org>  Thu, 09 Jan 2020 13:28:24 +0100
+
+python-daemonize (2.4.7-3) unstable; urgency=medium
+
+  [ Ondřej Nový ]
+  * d/control: Use team+openstack@tracker.debian.org as maintainer
+  * Use debhelper-compat instead of debian/compat.
+
+  [ Sakirnth Nagarasa ]
+  * Dropping Py2 support (Closes: #937685).
+
+ -- Sakirnth Nagarasa <sakirnth@gmail.com>  Mon, 22 Jul 2019 02:40:43 +0200
+
+python-daemonize (2.4.7-2) unstable; urgency=medium
+
+  * VCS points to Salsa.
+  * Add dh-python build-depends.
+  * Remove version of python-all build-depends.
+  * Standards-Version is now 4.1.3.
+
+ -- Thomas Goirand <zigo@debian.org>  Mon, 02 Apr 2018 21:22:34 +0200
+
+python-daemonize (2.4.7-1) unstable; urgency=medium
+
+  [ Ondřej Nový ]
+  * Fixed VCS URLs (https).
+  * d/rules: Changed UPSTREAM_GIT protocol to https
+
+  [ Daniel Baumann ]
+  * Updating vcs fields.
+  * Updating copyright format url.
+  * Updating maintainer field.
+  * Running wrap-and-sort -bast.
+  * Removing gbp.conf, not used anymore or should be specified in the
+    developers dotfiles.
+
+  [ Luca Weiss ]
+  * New upstream release (Closes: #857883)
+
+ -- Thomas Goirand <zigo@debian.org>  Wed, 25 Oct 2017 21:03:29 +0000
+
+python-daemonize (2.3.1-1) unstable; urgency=medium
+
+  * Initial release. (Closes: #732603)
+
+ -- Thomas Goirand <zigo@debian.org>  Sat, 01 Nov 2014 01:52:44 +0800

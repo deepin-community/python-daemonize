@@ -1,0 +1,131 @@
+Description: Use python3 for testing
+Author: Thomas Goirand <zigo@debian.org>
+Forwarded: no
+Last-Update: 2021-12-30
+
+Index: python-daemonize/tests/test.py
+===================================================================
+--- python-daemonize.orig/tests/test.py
++++ python-daemonize/tests/test.py
+@@ -18,7 +18,7 @@ else:
+ class DaemonizeTest(unittest.TestCase):
+     def setUp(self):
+         self.pidfile = mkstemp()[1]
+-        os.system("python tests/daemon_sigterm.py %s" % self.pidfile)
++        os.system("python3 tests/daemon_sigterm.py %s" % self.pidfile)
+         sleep(.1)
+ 
+     def tearDown(self):
+@@ -43,7 +43,7 @@ class LockingTest(unittest.TestCase):
+     def setUp(self):
+         self.pidfile = mkstemp()[1]
+         print("First daemonize process started")
+-        os.system("python tests/daemon_sigterm.py %s" % self.pidfile)
++        os.system("python3 tests/daemon_sigterm.py %s" % self.pidfile)
+         sleep(.1)
+ 
+     def tearDown(self):
+@@ -53,7 +53,7 @@ class LockingTest(unittest.TestCase):
+     def test_locking(self):
+         sleep(10)
+         print("Attempting to start second daemonize process")
+-        proc = subprocess.call(["python", "tests/daemon_sigterm.py", self.pidfile])
++        proc = subprocess.call(["python3", "tests/daemon_sigterm.py", self.pidfile])
+         self.assertEqual(proc, 1)
+ 
+ 
+@@ -61,7 +61,7 @@ class KeepFDsTest(unittest.TestCase):
+     def setUp(self):
+         self.pidfile = mkstemp()[1]
+         self.logfile = mkstemp()[1]
+-        os.system("python tests/daemon_keep_fds.py %s %s" % (self.pidfile, self.logfile))
++        os.system("python3 tests/daemon_keep_fds.py %s %s" % (self.pidfile, self.logfile))
+         sleep(1)
+ 
+     def tearDown(self):
+@@ -90,7 +90,7 @@ class UidGidTest(unittest.TestCase):
+ 
+         os.chown(self.logfile, NOBODY_UID, NOBODY_GID)
+ 
+-        os.system("python tests/daemon_uid_gid.py %s %s" % (self.pidfile, self.logfile))
++        os.system("python3 tests/daemon_uid_gid.py %s %s" % (self.pidfile, self.logfile))
+         sleep(1)
+ 
+         with open(self.logfile, "r") as f:
+@@ -104,7 +104,7 @@ class UidGidTest(unittest.TestCase):
+ 
+         os.chown(self.pidfile, NOBODY_UID, NOBODY_GID)
+ 
+-        os.system("python tests/daemon_uid_gid_action.py %s %s" % (self.pidfile, self.logfile))
++        os.system("python3 tests/daemon_uid_gid_action.py %s %s" % (self.pidfile, self.logfile))
+         sleep(1)
+ 
+         with open(self.logfile, "r") as f:
+@@ -120,7 +120,7 @@ Stopping daemon.
+ """
+         self.pidfile = mkstemp()[1]
+         self.logfile = mkstemp()[1]
+-        os.system("python tests/daemon_privileged_action.py %s %s" % (self.pidfile, self.logfile))
++        os.system("python3 tests/daemon_privileged_action.py %s %s" % (self.pidfile, self.logfile))
+         sleep(.1)
+ 
+     def tearDown(self):
+@@ -139,7 +139,7 @@ class ChdirTest(unittest.TestCase):
+         self.target = mkstemp()[1]
+         base, file = split(self.target)
+ 
+-        os.system("python tests/daemon_chdir.py %s %s %s" % (self.pidfile, base, file))
++        os.system("python3 tests/daemon_chdir.py %s %s %s" % (self.pidfile, base, file))
+         sleep(1)
+ 
+     def tearDown(self):
+Index: python-daemonize/tests/daemon_chdir.py
+===================================================================
+--- python-daemonize.orig/tests/daemon_chdir.py
++++ python-daemonize/tests/daemon_chdir.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ from sys import argv
+ 
+Index: python-daemonize/tests/daemon_keep_fds.py
+===================================================================
+--- python-daemonize.orig/tests/daemon_keep_fds.py
++++ python-daemonize/tests/daemon_keep_fds.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ import logging
+ from sys import argv
+Index: python-daemonize/tests/daemon_sigterm.py
+===================================================================
+--- python-daemonize.orig/tests/daemon_sigterm.py
++++ python-daemonize/tests/daemon_sigterm.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ from sys import argv
+ from time import sleep
+Index: python-daemonize/tests/daemon_uid_gid.py
+===================================================================
+--- python-daemonize.orig/tests/daemon_uid_gid.py
++++ python-daemonize/tests/daemon_uid_gid.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ from os import getuid, geteuid, getgid, getegid, path
+ from sys import argv
+Index: python-daemonize/tests/daemon_uid_gid_action.py
+===================================================================
+--- python-daemonize.orig/tests/daemon_uid_gid_action.py
++++ python-daemonize/tests/daemon_uid_gid_action.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ 
+ from os import getuid, geteuid, getgid, getegid, path
+ from sys import argv
